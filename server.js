@@ -23,6 +23,11 @@ app.get('/menu', async (req, res) => {
     res.json(allMenuItems)
 })
 
+app.get('/item', async (req, res) => {
+    const allItems = await Item.findAll()
+    res.json(allItems)
+})
+
 
 //Q: What will our server be doing? this is a way to talk to our server
 app.listen(port, () => {
