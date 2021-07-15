@@ -11,6 +11,22 @@ const port = 3000;
 //Q: What do you think path.join helps us do?
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.get('/restuarant/:id', async (req, res) => {
+    const oneRestuarant = await Restaurant.findByPk(req.params.id, {include : Menu})
+    res.json(oneRestuarant)
+})
+
+
+app.get('/menu/:id', async (req, res) => {
+    const oneMenu = await Menu.findByPk(req.params.id, {include : Restaurant})
+    res.json(oneMenu)
+})
+
+
+app.get('/item/:id', async (req, res) => {
+    const oneItem = await Item.findByPk(req.params.id)
+    res.json(oneItem)
+})
 //will add routes
 app.get('/restuarant', async (req, res) => {
     const allRestuarantItems = await Restaurant.findAll()
